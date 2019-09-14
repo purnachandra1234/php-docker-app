@@ -13,6 +13,7 @@ services:
       # - PHP_IDE_CONFIG=serverName=php-docker-app
       - MYSQL_HOST=db
       - MYSQL_DATABASE=app
+      - MYSQL_USER=appuser
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     hostname: web
