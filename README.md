@@ -5,12 +5,13 @@ This project intends to provide various php docker configurations as templates f
 Feel free to comment, test, fix, contribute or add your own template.
 
 ## Branches
-- master - providing php, nginx and mysql + composer
+- master - providing php, nginx and mysql + symfony skeleton & Doctrine
 - php-nginx - basic php and nginx setup
 - php-nginx-mysql - basic php, nginx and mysql setup
 - php-nginx-composer - basic php and nginx setup + composer
 - php-nginx-mysql-composer - basic php, nginx and mysql setup + composer
 - php-nginx-symfony - basic php and nginx setup + symfony skeleton
+- php-nginx-mysql-symfony - basic php, nginx and mysql + symfony skeleton & Doctrine
 
 ## docker-compose
 
@@ -72,4 +73,13 @@ Composer version 1.9.0 2019-08-02 20:55:32
 app $ docker-compose run --rm app bash -l
 root@app:/var/www/app# composer --version
 Composer version 1.9.0 2019-08-02 20:55:32
+```
+
+## symfony 4.3
+The symfony 4.3 skelleton, as well as the symfony installer is part of the proect. Use the skeleton or remove
+it and use the `smyonfy` command to create a new project.
+```console
+app $ docker-compose run --rm app bash -l
+root@app:/var/www/app# symfony new myapp
+...
 ```

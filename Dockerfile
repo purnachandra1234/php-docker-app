@@ -35,6 +35,11 @@ RUN apt-get install --quiet --yes wget \
     docker-php-ext-install -j$(nproc) zip && \
     wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet --install-dir=/usr/local/bin --filename=composer
 
+# Install symfony installer
+RUN apt-get install --quiet --yes git && \
+    wget https://get.symfony.com/cli/installer -O - | bash && \
+    mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
 ##
 # prod stage
 ##
@@ -47,7 +52,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Install dependencies
-ADD composer.json composer.lock ./
+ADD composer.json composer.lock symfony.lock ./
 RUN composer install --no-interaction --no-dev --no-scripts --no-plugins
 
 # Add sourcecode and run composer scripts

@@ -1,27 +1,27 @@
 <?php
 
-use App\App;
+use App\Kernel;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\HttpFoundation\Request;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__).'/config/bootstrap.php';
 
-echo "<h1>" . App::getGreeting() . "!</h1>";
+if ($_SERVER['APP_DEBUG']) {
+    umask(0000);
 
-// Read mysql version
-$db = getenv('MYSQL_DATABASE');
-$user = getenv('MYSQL_USER');
-$passwd = getenv('MYSQL_PASSWORD');
+    Debug::enable();
+}
 
-$pdo = new PDO('mysql:host=db;dbname=' . $db, $user, $passwd);
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {
+    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
+}
 
-$stm = $pdo->query("SELECT VERSION()");
-list($mysqlVersion) = $stm->fetch();
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false) {
+    Request::setTrustedHosts([$trustedHosts]);
+}
 
-?>
-
-<p>
-    Proudly running:
-    <ul>
-        <li>PHP: <?= phpversion();?></li>
-        <li>MySQL: <?= $mysqlVersion;?></li>
-    </ul>
-</p>
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
