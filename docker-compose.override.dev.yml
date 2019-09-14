@@ -35,6 +35,8 @@ services:
       - PMA_USER=root
     ports:
       - "8080:80"
+    depends_on:
+      - db
 
 volumes:
   code:
