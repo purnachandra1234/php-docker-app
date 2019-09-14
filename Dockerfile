@@ -9,3 +9,6 @@ RUN rm -r /var/www/html && \
     mkdir /var/www/app
 
 WORKDIR /var/www/app
+
+# Add some convenience
+RUN echo "alias ll='ls -al'" > /etc/profile.d/app.sh
