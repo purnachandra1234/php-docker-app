@@ -18,12 +18,12 @@ Feel free to comment, test, fix, contribute or add your own template.
 The simplest way to start the webserver and php-fpm containers is to use `docker-compose` by running:
 
 ```console
-app $ docker-compose up -d`
+app $ docker-compose up -d
 ```
 
 Run cron-jobs or any other command by starting a new container:
 ```console
-app $ docker-compose run [--rm] app php --version`
+app $ docker-compose run [--rm] app php --version
 ```
 
 Hook into running container to run your php software inside its environment:
