@@ -12,3 +12,6 @@ WORKDIR /var/www/app
 
 # Add some convenience
 RUN echo "alias ll='ls -al'" > /etc/profile.d/app.sh
+
+# Add app code
+ADD . ./
