@@ -49,7 +49,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Install dependencies
-ADD composer.json composer.lock ./
+ADD composer.json composer.lock symfony.lock ./
 RUN composer install --no-interaction --no-dev --no-scripts --no-plugins
 
 # Add sourcecode and run composer scripts
