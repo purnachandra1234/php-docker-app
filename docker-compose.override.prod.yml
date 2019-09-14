@@ -4,6 +4,9 @@
 version: '3.7'
 
 services:
+  app:
+    environment:
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     ports:
       - "80:80"

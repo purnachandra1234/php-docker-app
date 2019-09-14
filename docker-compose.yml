@@ -3,6 +3,8 @@ version: '3.7'
 services:
   app:
     build: .
+    environment:
+      - MYSQL_USER=appuser
     volumes:
       - "code:/var/www/app"
   web:

@@ -23,6 +23,9 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN pecl install xdebug-2.7.2 && \
     docker-php-ext-enable xdebug
 
+# Add app dependencies
+RUN docker-php-ext-install -j$(nproc) pdo_mysql
+
 ##
 # prod stage
 ##
