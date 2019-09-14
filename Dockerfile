@@ -24,6 +24,7 @@ RUN pecl install xdebug-2.7.2 && \
     docker-php-ext-enable xdebug
 
 # Install Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get install --quiet --yes wget \
                                   unzip \
                                   libzip4 \
