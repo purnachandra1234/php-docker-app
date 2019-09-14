@@ -1,6 +1,10 @@
 <?php
 
-echo "<h1>Hello php world!</h1>";
+use App\App;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+echo "<h1>" . App::getGreeting() . "!</h1>";
 
 // Read mysql version
 $db = getenv('MYSQL_DATABASE');
