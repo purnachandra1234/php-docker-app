@@ -11,6 +11,7 @@ services:
     environment:
       - XDEBUG_CONFIG=remote_enable=1 remote_host=host.docker.internal
       # - PHP_IDE_CONFIG=serverName=php-docker-app
+      - APP_ENV=dev
       - MYSQL_HOST=db
       - MYSQL_DATABASE=app
       - MYSQL_USER=appuser
