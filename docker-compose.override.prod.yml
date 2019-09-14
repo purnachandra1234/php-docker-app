@@ -4,6 +4,14 @@
 version: '3.7'
 
 services:
+  app:
+    environment:
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     ports:
       - "80:80"
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}

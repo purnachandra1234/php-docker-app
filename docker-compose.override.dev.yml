@@ -11,10 +11,26 @@ services:
     environment:
       - XDEBUG_CONFIG=remote_enable=1 remote_host=host.docker.internal
       # - PHP_IDE_CONFIG=serverName=php-docker-app
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     hostname: web
     ports:
       - "80:80"
+  db:
+    hostname: db
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+    ports:
+      - "8080:80"
 
 volumes:
   code:

@@ -3,6 +3,8 @@ version: '3.7'
 services:
   app:
     build: .
+    environment:
+      - MYSQL_USER=appuser
     volumes:
       - "code:/var/www/app"
   web:
@@ -12,6 +14,14 @@ services:
       - "code:/var/www/app:ro"
     depends_on:
       - app
+  db:
+    image: mariadb:latest
+    environment:
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=appuser
+    volumes:
+      - "mysqldata:/var/lib/mysql"
 
 volumes:
   code:
+  mysqldata:
