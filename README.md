@@ -72,3 +72,12 @@ app $ docker-compose run --rm app bash -l
 root@app:/var/www/app# composer --version
 Composer version 1.9.0 2019-08-02 20:55:32
 ```
+
+## symfony 4.3
+The symfony 4.3 skelleton, as well as the symfony installer is part of the proect. Use the skeleton or remove
+it and use the `smyonfy` command to create a new project.
+```console
+app $ docker-compose run --rm app bash -l
+root@app:/var/www/app# symfony new myapp
+...
+```
