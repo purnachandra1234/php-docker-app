@@ -88,7 +88,7 @@ root@app:/var/www/app# symfony new myapp
 ...
 ```
 
-Use the symfony console from running the container:
+Use the symfony console from running container:
 ```console
 jdoe@host:/home/jdoe/projects/app $ docker-compose exec app bash -l
 root@app:/var/www/app# bin/console cache:clear
