@@ -3,3 +3,13 @@ docker-compose.override.yml
 
 # composer
 vendor
+
+# symfony
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
