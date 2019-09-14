@@ -22,6 +22,14 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+    ports:
+      - "8080:80"
 
 volumes:
   code:
