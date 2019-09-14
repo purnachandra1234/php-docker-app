@@ -67,14 +67,14 @@ The latest master version of composer (https://getcomposer.org) is installed. Us
  to manage your app: 
 
 ```console
-app $ docker-compose exec app bash -l
+jdoe@host:/home/jdoe/projects/app $ docker-compose exec app bash -l
 root@app:/var/www/app# composer --version
 Composer version 1.9.0 2019-08-02 20:55:32
 ```
 
 ... or run it inside a fresh container, if you prefer:
 ```console
-app $ docker-compose run --rm app bash -l
+jdoe@host:/home/jdoe/projects/app $ docker-compose run --rm app bash -l
 root@app:/var/www/app# composer --version
 Composer version 1.9.0 2019-08-02 20:55:32
 ```
