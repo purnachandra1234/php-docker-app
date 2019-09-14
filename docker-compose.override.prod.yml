@@ -4,6 +4,9 @@
 version: '3.7'
 
 services:
+  app:
+    environment:
+      - APP_ENV=prod
   web:
     ports:
       - "80:80"
