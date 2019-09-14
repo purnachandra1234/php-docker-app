@@ -15,11 +15,34 @@ Feel free to comment, test, fix, contribute or add your own template.
 
 The simplest way to start the webserver and php-fpm containers is to use `docker-compose` by running:
 
-`project $ docker-compose up -d`
+```console
+app $ docker-compose up -d`
+```
 
 Run cron-jobs or any other command by starting a new container:
+```console
+app $ docker-compose run [--rm] app php --version`
+```
 
-`project $ docker-compose run [--rm] app php --version`
+Hook into running container to run your php software inside its environment:
+```console
+app $ docker-compose exec app bash -l
+root@app:/var/www/app# php --version
+PHP 7.3.9 (cli) (built: Sep 12 2019 10:23:43) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.9, Copyright (c) 1998-2018 Zend Technologies
+    with Xdebug v2.7.2, Copyright (c) 2002-2019, by Derick Rethans 
+```
+
+The same for a fresh container instance:
+```console
+app $ docker-compose run --rm app bash -l
+root@app:/var/www/app# php --version
+PHP 7.3.9 (cli) (built: Sep 12 2019 10:23:43) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.9, Copyright (c) 1998-2018 Zend Technologies
+    with Xdebug v2.7.2, Copyright (c) 2002-2019, by Derick Rethans 
+```
 
 ## development and production stages
 
