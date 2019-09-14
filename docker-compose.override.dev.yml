@@ -12,6 +12,7 @@ services:
       - XDEBUG_CONFIG=remote_enable=1 remote_host=host.docker.internal
       # - PHP_IDE_CONFIG=serverName=php-docker-app
       - MYSQL_HOST=db
+      - MYSQL_DATABASE=app
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     hostname: web
