@@ -23,6 +23,14 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN pecl install xdebug-2.7.2 && \
     docker-php-ext-enable xdebug
 
+# Install Composer
+RUN apt-get install --quiet --yes wget \
+                                  unzip \
+                                  libzip4 \
+                                  libzip-dev && \
+    docker-php-ext-install -j$(nproc) zip && \
+    wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet --install-dir=/usr/local/bin --filename=composer
+
 ##
 # prod stage
 ##
