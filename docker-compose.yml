@@ -5,6 +5,8 @@ services:
     build: .
     volumes:
       - "code:/var/www/app"
+    depends_on:
+      - db
   web:
     image: nginx:latest
     volumes:
