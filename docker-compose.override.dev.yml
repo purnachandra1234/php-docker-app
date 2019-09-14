@@ -8,6 +8,9 @@ services:
     build:
       target: dev
     hostname: app
+    environment:
+      - XDEBUG_CONFIG=remote_enable=1 remote_host=host.docker.internal
+      # - PHP_IDE_CONFIG=serverName=php-docker-app
     ports:
       - "80:80"
   web:
