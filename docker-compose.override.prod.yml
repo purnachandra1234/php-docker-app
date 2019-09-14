@@ -6,6 +6,7 @@ version: '3.7'
 services:
   app:
     environment:
+      - APP_ENV=prod
       - MYSQL_HOST=db
       - MYSQL_DATABASE=app
       - MYSQL_USER=appuser
