@@ -43,5 +43,10 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # Disable xdebug in production
 RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-# Add app code
-ADD . ./
+# Install dependencies
+ADD composer.json composer.lock ./
+RUN composer install --no-interaction --no-dev --no-scripts --no-plugins
+
+# Add sourcecode and run composer scripts
+ADD . .
+RUN composer install --no-interaction --no-dev
