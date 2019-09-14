@@ -7,8 +7,11 @@ services:
   app:
     build:
       target: dev
+    hostname: app
     ports:
       - "80:80"
+  web:
+    hostname: web
 
 volumes:
   code:
