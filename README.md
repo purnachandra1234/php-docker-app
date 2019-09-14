@@ -5,10 +5,11 @@ This project intends to provide various php docker configurations as templates f
 Feel free to comment, test, fix, contribute or add your own template.
 
 ## Branches
-- master - providing php and nginx + composer
+- master - providing php, nginx and mysql + composer
 - php-nginx - basic php and nginx setup
 - php-nginx-mysql - basic php, nginx and mysql setup
 - php-nginx-composer - basic php and nginx setup + composer
+- php-nginx-mysql-composer - basic php, nginx and mysql setup + composer
 
 ## docker-compose
 

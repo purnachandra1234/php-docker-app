@@ -26,6 +26,15 @@ RUN pecl install xdebug-2.7.2 && \
 # Add app dependencies
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
 
+# Install Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN apt-get install --quiet --yes wget \
+                                  unzip \
+                                  libzip4 \
+                                  libzip-dev && \
+    docker-php-ext-install -j$(nproc) zip && \
+    wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet --install-dir=/usr/local/bin --filename=composer
+
 ##
 # prod stage
 ##
