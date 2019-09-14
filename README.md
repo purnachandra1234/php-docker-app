@@ -10,6 +10,7 @@ Feel free to comment, test, fix, contribute or add your own template.
 - php-nginx-mysql - basic php, nginx and mysql setup
 - php-nginx-composer - basic php and nginx setup + composer
 - php-nginx-mysql-composer - basic php, nginx and mysql setup + composer
+- php-nginx-symfony - basic php and nginx setup + symfony skeleton
 
 ## docker-compose
 
