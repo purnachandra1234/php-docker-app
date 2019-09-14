@@ -55,3 +55,20 @@ The basic docker-compose.yml is intended to be extended by overrides and is ther
 mappings e.g.). Extend it by adding your customized override file. Templates are provided for development
 and production. The development override mounts the project directory from the host machine to enable rapid
 development inside the container.
+
+## composer (php)
+The latest master version of composer (https://getcomposer.org) is installed. Use it from a running container
+ to manage your app: 
+
+```console
+app $ docker-compose exec app bash -l
+root@app:/var/www/app# composer --version
+Composer version 1.9.0 2019-08-02 20:55:32
+```
+
+... or run it inside a fresh container, if you prefer:
+```console
+app $ docker-compose run --rm app bash -l
+root@app:/var/www/app# composer --version
+Composer version 1.9.0 2019-08-02 20:55:32
+```
