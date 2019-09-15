@@ -1,0 +1,63 @@
+language: minimal
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.24.1 MYSQL_HOST=db MYSQL_DATABASE=app MYSQL_USER=appuser MYSQL_PASSWORD=secret MYSQL_ROOT_PASSWORD=verysecret
+
+before_install:
+  # Update docker-compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+  # Add simple test scripts
+  - echo 'while read input ; do if [[ $input == *"$1"* ]]; then exit 0; fi; done; exit 1;' > contains.sh
+  - echo 'while read input ; do if [[ $input != *"$1"* ]]; then exit 0; fi; done; exit 1;' > notcontains.sh
+
+script:
+  # build and start development containers
+  - cp docker-compose.override.ci.yml docker-compose.override.yml
+  - docker-compose build
+  - docker-compose up --detach
+
+  # development tests
+  - 'docker ps | bash contains.sh php-docker-app_app'
+  - 'docker ps | bash contains.sh php-docker-app_web'
+  - 'docker ps | bash contains.sh php-docker-app_db'
+  - 'docker ps | bash contains.sh php-docker-app_phpmyadmin'
+
+  - 'docker-compose exec app php --version | bash contains.sh "PHP 7.3.9"'
+  - 'docker-compose exec app php --version | bash contains.sh "with Xdebug"'
+
+  - 'curl -sI localhost | bash contains.sh "HTTP/1.1 404 Not Found"'
+  - 'curl -sI localhost:8080 | bash contains.sh "HTTP/1.1 200 OK"'
+
+  # Shut down
+  - docker-compose down --volumes
+
+  # build and start production containers
+  - cp docker-compose.override.prod.yml docker-compose.override.yml
+  - docker-compose build
+  - docker-compose up --detach
+
+  # production tests
+  - 'docker ps | bash contains.sh php-docker-app_app'
+  - 'docker ps | bash contains.sh php-docker-app_web'
+  - 'docker ps | bash contains.sh php-docker-app_db'
+  - 'docker ps | bash notcontains.sh php-docker-app_phpmyadmin'
+
+  - 'docker-compose exec app php --version | bash contains.sh "PHP 7.3.9"'
+  - 'docker-compose exec app php --version | bash notcontains.sh "with Xdebug"'
+
+  # We have to give mysql a while to set up the user
+  - 'sleep 15 ### Give mysql some time to initialize itself..'
+
+  - 'curl -s localhost | bash contains.sh "Hello php world"'
+  - 'curl -s localhost | bash contains.sh "PHP: 7.3.9"'
+  - 'curl -s localhost | bash contains.sh "MySQL: 10.4"'
+
+  # Shut down
+  - docker-compose down --volumes
