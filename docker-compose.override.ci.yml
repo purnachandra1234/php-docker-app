@@ -1,0 +1,14 @@
+##
+# Template for ci, mimics development
+##
+version: '3.7'
+
+services:
+  app:
+    build:
+      target: dev
+    hostname: app
+  web:
+    hostname: web
+    ports:
+      - "80:80"
