@@ -8,7 +8,29 @@ services:
     build:
       target: dev
     hostname: app
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
   web:
     hostname: web
     ports:
       - "80:80"
+  db:
+    hostname: db
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: phpmyadmin
+    environment:
+      - PMA_HOST=${MYSQL_HOST}
+      - PMA_USER=root
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
