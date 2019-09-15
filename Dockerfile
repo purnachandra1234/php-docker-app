@@ -47,6 +47,7 @@ RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 ADD composer.json composer.lock ./
 RUN composer install --no-interaction --no-dev --no-scripts --no-plugins
 
-# Add sourcecode and run composer scripts
-ADD . .
-RUN composer install --no-interaction --no-dev
+# Add app code
+ADD . ./
+
+CMD ["sh", "/var/www/app/docker-entrypoint.sh"]
