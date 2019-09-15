@@ -52,6 +52,9 @@ script:
   - 'docker-compose exec app php --version | bash contains.sh "PHP 7.3.9"'
   - 'docker-compose exec app php --version | bash notcontains.sh "with Xdebug"'
 
+  # We have to give mysql a while to set up the user
+  - 'sleep 12 ### Give mysql some time to initialize itself..'
+
   - 'curl -s localhost | bash contains.sh "Hello php world"'
   - 'curl -s localhost | bash contains.sh "PHP: 7.3.9"'
   - 'curl -s localhost | bash contains.sh "MySQL: 10.4"'
