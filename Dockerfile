@@ -36,3 +36,5 @@ RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Add app code
 ADD . ./
+
+CMD ["sh", "/var/www/app/docker-entrypoint.sh"]
